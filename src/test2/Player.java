@@ -19,7 +19,6 @@ public class Player extends JLabel implements Moveable {
     private final int JUMP_SPEED = 2;
 
     // 플레이이어의 움직임 상태
-    private boolean jumping = false;
     @Setter
     private boolean left;
 
@@ -51,19 +50,21 @@ public class Player extends JLabel implements Moveable {
         setSize(50, 50);
         setLocation(x, y);
         setIcon(playerR);
-        right = true;
     }
 
 
     @Override
     public void left() {
+        if (left) {
+            return;
+        }
         left = true;
         setIcon(playerL);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while (left) {
-                    x = x - SPEED;
+                    x -= SPEED;
                     setLocation(x, y);
                     try {
                         Thread.sleep(10);
@@ -77,13 +78,16 @@ public class Player extends JLabel implements Moveable {
 
     @Override
     public void right() {
+        if (right) {
+            return;
+        }
         right = true;
         setIcon(playerR);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while (right) {
-                    x = x + SPEED;
+                    x += SPEED;
                     setLocation(x, y);
                     try {
                         Thread.sleep(10);
@@ -105,21 +109,21 @@ public class Player extends JLabel implements Moveable {
             @Override
             public void run() {
                 int count = 0;
-                int maxCount = 30;
+                int maxCount = 70;
 
                 try {
                     while (count < maxCount) {
                         y -= JUMP_SPEED;
                         count++;
                         setLocation(x, y);
-                        Thread.sleep(10);
+                        Thread.sleep(5);
                     }
 
                     while (count > 0) {
                         y += JUMP_SPEED;
                         count--;
                         setLocation(x, y);
-                        Thread.sleep(10);
+                        Thread.sleep(7);
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
