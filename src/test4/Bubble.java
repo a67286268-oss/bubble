@@ -54,7 +54,6 @@ public class Bubble extends JLabel implements Moveable {
                     throw new RuntimeException(e);
                 }
             }
-            left = false;
             up();
         }).start();
     }
@@ -73,7 +72,6 @@ public class Bubble extends JLabel implements Moveable {
                     throw new RuntimeException(e);
                 }
             }
-            right = false;
             up();
         }).start();
     }
